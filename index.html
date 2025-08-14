@@ -649,65 +649,6 @@
             </form>
         </div>
     </div>
-    
-    <!-- Page Super Admin -->
-    <div id="superAdminPage" class="hidden container mx-auto p-4 flex items-center justify-center min-h-screen">
-        <div class="bg-white rounded-xl shadow-2xl p-8 w-full max-w-2xl fade-in">
-            <div class="text-center mb-8">
-                <div class="bg-red-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6.364-3.636l-1.414 1.414M20.364 13.364l-1.414-1.414M12 3v2m-6.364 3.636l-1.414-1.414M20.364 6.636l-1.414 1.414M4 12H2m18 0h-2m-2.636 6.364l1.414 1.414M5.636 18.364l1.414-1.414"></path>
-                    </svg>
-                </div>
-                <h1 class="text-2xl font-bold text-gray-800 mb-2">Mode Super Administrateur</h1>
-                <p class="text-gray-600">Outils de maintenance et de gestion avancée</p>
-            </div>
-            
-            <div class="space-y-6">
-                <!-- Section Export -->
-                <div class="bg-gray-50 p-4 rounded-lg">
-                    <h3 class="font-semibold text-gray-800 mb-3">Exporter les Données</h3>
-                    <div class="flex space-x-4">
-                        <button id="saExportStudentsBtn" class="flex-1 bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-lg">
-                            Exporter Élèves (CSV)
-                        </button>
-                        <button id="saExportReportsBtn" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg">
-                            Exporter Signalements (CSV)
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Section Logo -->
-                <div class="bg-gray-50 p-4 rounded-lg">
-                    <h3 class="font-semibold text-gray-800 mb-3">Changer le Logo du Collège</h3>
-                    <label for="saLogoUploadInput" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-lg cursor-pointer text-center block">
-                        Choisir une image
-                    </label>
-                    <input type="file" id="saLogoUploadInput" class="hidden" accept="image/*">
-                    <p id="saLogoUploadStatus" class="text-sm text-gray-600 mt-2 text-center"></p>
-                </div>
-
-                <!-- Zone de Danger -->
-                <div class="bg-red-50 border-2 border-red-200 p-4 rounded-lg">
-                    <h3 class="font-bold text-red-800 mb-3 text-center">🚨 Zone de Danger 🚨</h3>
-                    <div class="space-y-3">
-                        <button id="resetMasterPasswordBtn" class="w-full bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-2 px-4 rounded-lg">
-                            Réinitialiser le Mot de Passe Maître
-                        </button>
-                         <button id="resetAppBtn" class="w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-lg">
-                            Réinitialiser TOUTE l'application
-                        </button>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="mt-8 text-center">
-                <button id="backToAdminLoginBtn" class="text-gray-500 hover:text-gray-700">
-                    ← Retour à la page de connexion
-                </button>
-            </div>
-        </div>
-    </div>
 
     <script src="script.js"></script>
 </body>
