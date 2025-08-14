@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plateforme Anti-Harcèlement - Collège Louis Pasteur</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-gradient-to-br from-green-50 to-emerald-100 min-h-screen">
+    
+    <!-- Page d'Accueil -->
+    <div id="homePage" class="container mx-auto p-4 flex items-center justify-center min-h-screen">
+        <div class="bg-white rounded-xl shadow-2xl p-8 w-full max-w-md fade-in">
+            <div class="text-center mb-8">
+                <div class="logo-container bg-green-500 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <img id="logoImage" src="" alt="" class="w-16 h-16 rounded-full object-cover hidden">
+                    <svg id="defaultLogo" class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                    </svg>
+                    <input type="file" id="logoUpload" class="logo-upload" accept="image/*">
+                </div>
+                <h1 class="text-2xl font-bold text-gray-800 mb-1">Collège Louis Pasteur</h1>
+                <p class="text-green-600 text-sm mb-4">Coréalisé par les élèves de 3ème 24/25</p>
+                <h2 class="text-xl font-semibold text-gray-700">Plateforme Anti-Harcèlement</h2>
+                <p class="text-gray-600 mt-2">Un espace sécurisé pour signaler et lutter contre le harcèlement</p>
+            </div>
+            
+            <div class="space-y-4">
+                <button id="studentLoginBtn" class="w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-3 px-4 rounded-lg transition duration-200">
+                    🎓 Connexion Élèves
+                </button>
+                <button id="adminLoginBtn" class="w-full bg-gray-500 hover:bg-gray-600 text-white font-semibold py-3 px-4 rounded-lg transition duration-200">
+                    👨‍💼 Administrateur
+                </button>
+            </div>
+            
+            <div class="mt-8 p-4 bg-green-50 rounded-lg">
+                <h3 class="font-semibold text-green-800 mb-2">🛡️ Sécurité & Confidentialité</h3>
+                <ul class="text-sm text-green-700 space-y-1">
+                    <li>• Données chiffrées et sécurisées</li>
+                    <li>• Anonymat respecté</li>
+                    <li>• Signalements traités rapidement</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Page Inscription Élève -->
+    <div id="studentRegisterPage" class="hidden container mx-auto p-4 flex items-center justify-center min-h-screen">
+        <div class="bg-white rounded-xl shadow-2xl p-8 w-full max-w-md fade-in">
+            <div class="text-center mb-8">
+                <div class="bg-green-500 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"></path>
+                    </svg>
+                </div>
+                <h1 class="text-2xl font-bold text-gray-800 mb-2">Inscription Élève</h1>
+                <p class="text-gray-600">Créez votre compte sécurisé</p>
+            </div>
+            
+            <form id="studentRegisterForm" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Identifiant (prénom.nom)</label>
+                    <input type="text" id="studentId" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent" placeholder="ex: marie.dupont" required>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Classe</label>
+                    <select id="studentClass" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent" required>
+                        <option value="">Sélectionnez votre classe</option>
+                        <option value="6G1">6G1</option>
+                        <option value="6G2">6G2</option>
+                        <option value="6G3">6G3</option>
+                        <option value="6G4">6G4</option>
+                        <option value="6G5">6G5</option>
+                        <option value="6G6">6G6</option>
+                        <option value="6G7">6G7</option>
+                        <option value="6G8">6G8</option>
+                        <option value="6G9">6G9</option>
+                        <option value="5G1">5G1</option>
+                        <option value="5G2">5G2</option>
+                        <option value="5G3">5G3</option>
+                        <option value="5G4">5G4</option>
+                        <option value="5G5">5G5</option>
+                        <option value="5G6">5G6</option>
+                        <option value="5G7">5G7</option>
+                        <option value="5G8">5G8</option>
+                        <option value="5G9">5G9</option>
+                        <option value="4G1">4G1</option>
+                        <option value="4G2">4G2</option>
+                        <option value="4G3">4G3</option>
+                        <option value="4G4">4G4</option>
+                        <option value="4G5">4G5</option>
+                        <option value="4G6">4G6</option>
+                        <option value="4G7">4G7</option>
+                        <option value="4G8">4G8</option>
+                        <option value="4G9">4G9</option>
+                        <option value="3G1">3G1</option>
+                        <option value="3G2">3G2</option>
+                        <option value="3G3">3G3</option>
+                        <option value="3G4">3G4</option>
+                        <option value="3G5">3G5</option>
+                        <option value="3G6">3G6</option>
+                        <option value="3G7">3G7</option>
+                        <option value="3G8">3G8</option>
+                        <option value="3G9">3G9</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Mot de passe fourni par l'administrateur</label>
+                    <input type="password" id="tempPassword" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent" placeholder="Mot de passe initial" required>
+                </div>
+                <button type="submit" class="w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-3 px-4 rounded-lg transition duration-200">
+                    S'inscrire
+                </button>
+            </form>
+            
+            <div class="mt-6 text-center">
+                <button id="alreadyRegisteredBtn" class="text-green-600 hover:text-green-700 font-medium">
+                    Déjà inscrit ? Se connecter
+                </button>
+            </div>
+            
+            <div class="mt-6 text-center">
+                <button id="backToHomeBtn" class="text-gray-500 hover:text-gray-700">
+                    ← Retour à l'accueil
+                </button>
+            </div>
+            
+            <div id="registerMessage" class="hidden mt-4 p-3 rounded-lg text-center"></div>
+        </div>
+    </div>
+
+    <!-- Page Connexion Élève -->
+    <div id="studentLoginPage" class="hidden container mx-auto p-4 flex items-center justify-center min-h-screen">
+        <div class="bg-white rounded-xl shadow-2xl p-8 w-full max-w-md fade-in">
+            <div class="text-center mb-8">
+                <div class="bg-green-500 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                    </svg>
+                </div>
+                <h1 class="text-2xl font-bold text-gray-800 mb-2">Connexion Élève</h1>
+                <p class="text-gray-600">Accédez à votre espace sécurisé</p>
+            </div>
+            
+            <form id="studentLoginForm" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Identifiant</label>
+                    <input type="text" id="loginStudentId" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent" placeholder="votre.identifiant" required>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Mot de passe</label>
+                    <input type="password" id="loginPassword" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent" placeholder="Votre mot de passe ou code secret" required>
+                </div>
+                <button type="submit" class="w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-3 px-4 rounded-lg transition duration-200">
+                    Se connecter
+                </button>
+            </form>
+            
+            <div class="bg-green-50 p-4 rounded-lg mt-6">
+                <h3 class="font-semibold text-green-800 mb-2">ℹ️ Informations</h3>
+                <p class="text-sm text-green-700">Pour votre première connexion, utilisez le mot de passe qui vous a été fourni. Un code secret personnel vous sera alors attribué pour les connexions suivantes.</p>
+            </div>
+            
+            <div class="mt-4 text-center">
+                <button id="backToHomeFromLoginBtn" class="text-gray-500 hover:text-gray-700">
+                    ← Retour à l'accueil
+                </button>
+            </div>
+            
+            <div id="loginMessage" class="hidden mt-4 p-3 rounded-lg text-center"></div>
+        </div>
+    </div>
+
+    <!-- Page Signalement Élève -->
+    <div id="studentReportPage" class="hidden container mx-auto p-4 py-8">
+        <div class="max-w-2xl mx-auto">
+            <div class="bg-white rounded-xl shadow-lg p-8 mb-8">
+                <div class="flex justify-between items-center mb-6">
+                    <div>
+                        <h1 class="text-3xl font-bold text-gray-800">Signaler une situation</h1>
+                        <p class="text-gray-600 mt-2">Votre signalement sera traité en toute confidentialité</p>
+                    </div>
+                    <button id="studentLogoutBtn" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg transition duration-200">
+                        Déconnexion
+                    </button>
+                </div>
+                
+                <form id="reportForm" class="space-y-6">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Type de situation</label>
+                        <select id="reportType" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent" required>
+                            <option value="">Sélectionnez le type</option>
+                            <option value="physical">Harcèlement physique</option>
+                            <option value="verbal">Harcèlement verbal</option>
+                            <option value="cyber">Cyber-harcèlement</option>
+                            <option value="discrimination">Discrimination</option>
+                            <option value="exclusion">Exclusion sociale</option>
+                            <option value="other">Autre</option>
+                        </select>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Vous êtes</label>
+                        <select id="reportRole" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent" required>
+                            <option value="">Sélectionnez</option>
+                            <option value="victim">Victime</option>
+                            <option value="witness">Témoin</option>
+                        </select>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Lieu de la situation</label>
+                        <input type="text" id="reportLocation" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent" placeholder="Ex: Cour de récréation, couloir, classe..." required>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Description de la situation</label>
+                        <textarea id="reportDescription" rows="6" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent" placeholder="Décrivez ce qui s'est passé de manière détaillée..." required></textarea>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Fréquence</label>
+                        <select id="reportFrequency" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent" required>
+                            <option value="">Sélectionnez</option>
+                            <option value="first-time">Première fois</option>
+                            <option value="occasional">Occasionnel</option>
+                            <option value="frequent">Fréquent</option>
+                            <option value="daily">Quotidien</option>
+                        </select>
+                    </div>
+                    
+                    <div class="bg-green-50 p-4 rounded-lg">
+                        <h3 class="font-semibold text-green-800 mb-2">🔒 Confidentialité</h3>
+                        <p class="text-sm text-green-700">Votre signalement sera transmis de manière sécurisée à l'équipe PHARE du collège. Votre identité sera protégée.</p>
+                    </div>
+                    
+                    <button type="submit" class="w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-3 px-4 rounded-lg transition duration-200">
+                        Envoyer le signalement
+                    </button>
+                </form>
+                
+                <div id="reportMessage" class="hidden mt-4 p-3 rounded-lg text-center"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Page Connexion Admin -->
+    <div id="adminLoginPage" class="hidden container mx-auto p-4 flex items-center justify-center min-h-screen">
+        <div class="bg-white rounded-xl shadow-2xl p-8 w-full max-w-md fade-in">
+            <div class="text-center mb-8">
+                <div class="bg-gray-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                    </svg>
+                </div>
+                <h1 class="text-2xl font-bold text-gray-800 mb-2">Accès Administrateur</h1>
+                <p class="text-gray-600">Équipe PHARE - Accès sécurisé</p>
+            </div>
+            
+            <div id="adminLoginContainer">
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Mot de passe Maître</label>
+                        <input type="password" id="adminCode" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-transparent" placeholder="Entrez le mot de passe">
+                    </div>
+                    <button id="loginAdminBtn" class="w-full bg-gray-600 hover:bg-gray-700 text-white font-semibold py-3 px-4 rounded-lg transition duration-200">
+                        Se connecter
+                    </button>
+                    <div id="adminLoginError" class="hidden text-red-600 text-sm text-center bg-red-50 p-3 rounded-lg">
+                        Mot de passe incorrect. Veuillez réessayer.
+                    </div>
+                </div>
+            </div>
+
+            <div id="adminSetupContainer" class="hidden">
+                <div class="bg-blue-50 p-4 rounded-lg mb-6 text-center">
+                    <h3 class="font-semibold text-blue-800 mb-2">🚀 Première Configuration</h3>
+                    <p class="text-sm text-blue-700">Bienvenue. Veuillez définir un "mot de passe maître" pour sécuriser l'accès à la plateforme et chiffrer les données.</p>
+                </div>
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Nouveau Mot de Passe Maître</label>
+                        <input type="password" id="newMasterPassword" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" placeholder="Choisissez un mot de passe robuste">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Confirmez le Mot de Passe</label>
+                        <input type="password" id="confirmMasterPassword" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" placeholder="Retapez le mot de passe">
+                    </div>
+                    <button id="setupAdminBtn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-4 rounded-lg transition duration-200">
+                        Configurer et Enregistrer
+                    </button>
+                    <div id="adminSetupError" class="hidden text-red-600 text-sm text-center bg-red-50 p-3 rounded-lg"></div>
+                </div>
+            </div>
+            
+            <div class="mt-6 text-center">
+                <button id="backToHomeFromAdminBtn" class="text-gray-500 hover:text-gray-700">
+                    ← Retour à l'accueil
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Interface Admin -->
+    <div id="adminPanel" class="hidden container mx-auto p-4 py-8">
+        <!-- En-tête -->
+        <div class="bg-white rounded-xl shadow-lg p-6 mb-8">
+            <div class="flex justify-between items-center">
+                <div>
+                    <h1 class="text-3xl font-bold text-gray-800">Tableau de Bord PHARE</h1>
+                    <p class="text-gray-600 mt-2">Gestion des signalements - Collège Louis Pasteur</p>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button id="configBtn" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition duration-200">
+                        ⚙️ Configuration
+                    </button>
+                    <button id="manageStudentsBtn" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg transition duration-200">
+                        👥 Gestion Élèves
+                    </button>
+                    <button id="adminLogoutBtn" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg transition duration-200">
+                        Déconnexion
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Statistiques -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+            <div class="bg-white rounded-xl shadow-lg p-6">
+                <div class="flex items-center">
+                    <div class="bg-red-100 p-3 rounded-full">
+                        <svg class="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
+                        </svg>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-sm font-medium text-gray-600">Nouveaux</p>
+                        <p id="newCount" class="text-2xl font-bold text-red-600">0</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-white rounded-xl shadow-lg p-6">
+                <div class="flex items-center">
+                    <div class="bg-yellow-100 p-3 rounded-full">
+                        <svg class="w-6 h-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-sm font-medium text-gray-600">En cours</p>
+                        <p id="inProgressCount" class="text-2xl font-bold text-yellow-600">0</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-white rounded-xl shadow-lg p-6">
+                <div class="flex items-center">
+                    <div class="bg-green-100 p-3 rounded-full">
+                        <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-sm font-medium text-gray-600">Résolus</p>
+                        <p id="resolvedCount" class="text-2xl font-bold text-green-600">0</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-white rounded-xl shadow-lg p-6">
+                <div class="flex items-center">
+                    <div class="bg-blue-100 p-3 rounded-full">
+                        <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                        </svg>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-sm font-medium text-gray-600">Total</p>
+                        <p id="totalCount" class="text-2xl font-bold text-blue-600">0</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Actions Rapides -->
+        <div class="bg-white rounded-xl shadow-lg p-6 mb-8">
+            <h2 class="text-xl font-bold text-gray-800 mb-4">Actions Rapides</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <button id="exportDataBtn" class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-semibold transition duration-200">
+                    📊 Exporter les Données
+                </button>
+                <button id="generateReportBtn" class="bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-lg font-semibold transition duration-200">
+                    📋 Rapport Mensuel
+                </button>
+            </div>
+        </div>
+
+        <!-- Liste des Signalements -->
+        <div class="bg-white rounded-xl shadow-lg p-6">
+            <h2 class="text-xl font-bold text-gray-800 mb-6">Signalements</h2>
+            <div id="reportsList" class="space-y-4">
+                <!-- Les signalements seront affichés ici -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Gestion des Élèves (Admin uniquement) -->
+    <div id="studentManagement" class="hidden container mx-auto p-6">
+        <!-- En-tête -->
+        <div class="bg-white rounded-xl shadow-lg p-6 mb-6 fade-in">
+            <div class="flex justify-between items-center">
+                <div>
+                    <h1 class="text-3xl font-bold text-gray-800">Gestion des Élèves</h1>
+                    <p class="text-gray-600 mt-2">Collège Louis Pasteur - Base de données des élèves</p>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button id="backToAdminBtn" class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg transition duration-200">
+                        ← Retour au tableau de bord
+                    </button>
+                    <div class="bg-green-500 w-16 h-16 rounded-full flex items-center justify-center">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"></path>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Barre d'outils -->
+        <div class="bg-white rounded-xl shadow-lg p-4 mb-6 fade-in">
+            <div class="flex flex-wrap gap-3">
+                <button id="addRowBtn" class="toolbar-btn bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg font-medium flex items-center space-x-2">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                    </svg>
+                    <span>Ajouter Élève</span>
+                </button>
+                
+                <button id="deleteRowBtn" class="toolbar-btn bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg font-medium flex items-center space-x-2">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                    </svg>
+                    <span>Supprimer</span>
+                </button>
+                
+                <button id="generatePasswordBtn" class="toolbar-btn bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium flex items-center space-x-2">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1721 9z"></path>
+                    </svg>
+                    <span>Générer Mots de Passe</span>
+                </button>
+                
+                <button id="exportStudentsBtn" class="toolbar-btn bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg font-medium flex items-center space-x-2">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                    </svg>
+                    <span>Exporter CSV</span>
+                </button>
+                
+                <button id="importStudentsBtn" class="toolbar-btn bg-orange-600 hover:bg-orange-700 text-white px-4 py-2 rounded-lg font-medium flex items-center space-x-2">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10"></path>
+                    </svg>
+                    <span>Importer CSV</span>
+                </button>
+                
+                <input type="file" id="fileInput" accept=".csv" class="hidden">
+                
+                <div class="ml-auto flex items-center space-x-2">
+                    <span class="text-sm text-gray-600">Total élèves:</span>
+                    <span id="studentCount" class="bg-green-100 text-green-800 px-3 py-1 rounded-full font-semibold">0</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tableau Excel -->
+        <div class="bg-white rounded-xl shadow-lg overflow-hidden fade-in">
+            <div class="overflow-x-auto">
+                <table id="studentTable" class="excel-table w-full">
+                    <thead>
+                        <tr>
+                            <th class="excel-cell excel-header row-number">#</th>
+                            <th class="excel-cell excel-header" style="min-width: 200px;">
+                                Identifiant (nom.prénom)
+                            </th>
+                            <th class="excel-cell excel-header" style="min-width: 150px;">
+                                Classe
+                            </th>
+                            <th class="excel-cell excel-header" style="min-width: 180px;">
+                                Mot de passe provisoire
+                            </th>
+                            <th class="excel-cell excel-header" style="min-width: 150px;">
+                                Code secret (Admin)
+                            </th>
+                            <th class="excel-cell excel-header" style="min-width: 300px;">
+                                Signalements
+                            </th>
+                            <th class="excel-cell excel-header" style="min-width: 100px;">
+                                Actions
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody">
+                        <!-- Les lignes seront générées dynamiquement -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Statistiques -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mt-6">
+            <div class="bg-white rounded-xl shadow-lg p-6 fade-in">
+                <div class="flex items-center">
+                    <div class="bg-blue-100 p-3 rounded-full">
+                        <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"></path>
+                        </svg>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-sm font-medium text-gray-600">6ème</p>
+                        <p id="count6" class="text-2xl font-bold text-blue-600">0</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-white rounded-xl shadow-lg p-6 fade-in">
+                <div class="flex items-center">
+                    <div class="bg-green-100 p-3 rounded-full">
+                        <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"></path>
+                        </svg>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-sm font-medium text-gray-600">5ème</p>
+                        <p id="count5" class="text-2xl font-bold text-green-600">0</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-white rounded-xl shadow-lg p-6 fade-in">
+                <div class="flex items-center">
+                    <div class="bg-yellow-100 p-3 rounded-full">
+                        <svg class="w-6 h-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"></path>
+                        </svg>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-sm font-medium text-gray-600">4ème</p>
+                        <p id="count4" class="text-2xl font-bold text-yellow-600">0</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-white rounded-xl shadow-lg p-6 fade-in">
+                <div class="flex items-center">
+                    <div class="bg-purple-100 p-3 rounded-full">
+                        <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"></path>
+                        </svg>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-sm font-medium text-gray-600">3ème</p>
+                        <p id="count3" class="text-2xl font-bold text-purple-600">0</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Instructions -->
+        <div class="bg-white rounded-xl shadow-lg p-6 mt-6 fade-in">
+            <h3 class="text-lg font-semibold text-gray-800 mb-4">📋 Instructions d'utilisation</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <h4 class="font-medium text-gray-700 mb-2">Saisie des données :</h4>
+                    <ul class="text-sm text-gray-600 space-y-1">
+                        <li>• Cliquez sur une cellule pour la modifier</li>
+                        <li>• Format identifiant : prénom.nom (en minuscules)</li>
+                        <li>• Classes disponibles : 6G1-6G9, 5G1-5G9, 4G1-4G9, 3G1-3G9</li>
+                        <li>• Le mot de passe provisoire doit être défini pour chaque élève.</li>
+                        <li>• Code secret : généré automatiquement à la première connexion de l'élève.</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-medium text-gray-700 mb-2">Fonctionnalités :</h4>
+                    <ul class="text-sm text-gray-600 space-y-1">
+                        <li>• Génération automatique de mots de passe</li>
+                        <li>• Export/Import au format CSV</li>
+                        <li>• Sauvegarde automatique des modifications</li>
+                        <li>• Statistiques par niveau de classe</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Configuration -->
+    <div id="configModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div class="bg-white rounded-xl shadow-2xl p-8 w-full max-w-2xl m-4 max-h-screen overflow-y-auto">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-bold text-gray-800">Configuration PHARE</h2>
+                <button id="closeConfigBtn" class="text-gray-500 hover:text-gray-700">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+            
+            <form id="configForm" class="space-y-6">
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-800 mb-4">📱 Notifications SMS</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Téléphone 1</label>
+                            <input type="tel" id="phone1" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" placeholder="06 12 34 56 78">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Téléphone 2</label>
+                            <input type="tel" id="phone2" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" placeholder="06 12 34 56 78">
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-800 mb-4">📧 Notifications Email</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Email 1</label>
+                            <input type="email" id="email1" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" placeholder="phare1@college-pasteur.fr">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Email 2</label>
+                            <input type="email" id="email2" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" placeholder="phare2@college-pasteur.fr">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="flex justify-end space-x-4">
+                    <button type="button" id="cancelConfigBtn" class="px-6 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition duration-200">
+                        Annuler
+                    </button>
+                    <button type="submit" class="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition duration-200">
+                        Enregistrer
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Page Super Admin -->
+    <div id="superAdminPage" class="hidden container mx-auto p-4 flex items-center justify-center min-h-screen">
+        <div class="bg-white rounded-xl shadow-2xl p-8 w-full max-w-2xl fade-in">
+            <div class="text-center mb-8">
+                <div class="bg-red-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6.364-3.636l-1.414 1.414M20.364 13.364l-1.414-1.414M12 3v2m-6.364 3.636l-1.414-1.414M20.364 6.636l-1.414 1.414M4 12H2m18 0h-2m-2.636 6.364l1.414 1.414M5.636 18.364l1.414-1.414"></path>
+                    </svg>
+                </div>
+                <h1 class="text-2xl font-bold text-gray-800 mb-2">Mode Super Administrateur</h1>
+                <p class="text-gray-600">Outils de maintenance et de gestion avancée</p>
+            </div>
+            
+            <div class="space-y-6">
+                <!-- Section Export -->
+                <div class="bg-gray-50 p-4 rounded-lg">
+                    <h3 class="font-semibold text-gray-800 mb-3">Exporter les Données</h3>
+                    <div class="flex space-x-4">
+                        <button id="saExportStudentsBtn" class="flex-1 bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-lg">
+                            Exporter Élèves (CSV)
+                        </button>
+                        <button id="saExportReportsBtn" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg">
+                            Exporter Signalements (CSV)
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Section Logo -->
+                <div class="bg-gray-50 p-4 rounded-lg">
+                    <h3 class="font-semibold text-gray-800 mb-3">Changer le Logo du Collège</h3>
+                    <label for="saLogoUploadInput" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-lg cursor-pointer text-center block">
+                        Choisir une image
+                    </label>
+                    <input type="file" id="saLogoUploadInput" class="hidden" accept="image/*">
+                    <p id="saLogoUploadStatus" class="text-sm text-gray-600 mt-2 text-center"></p>
+                </div>
+
+                <!-- Zone de Danger -->
+                <div class="bg-red-50 border-2 border-red-200 p-4 rounded-lg">
+                    <h3 class="font-bold text-red-800 mb-3 text-center">🚨 Zone de Danger 🚨</h3>
+                    <div class="space-y-3">
+                        <button id="resetMasterPasswordBtn" class="w-full bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-2 px-4 rounded-lg">
+                            Réinitialiser le Mot de Passe Maître
+                        </button>
+                         <button id="resetAppBtn" class="w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-lg">
+                            Réinitialiser TOUTE l'application
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-8 text-center">
+                <button id="backToAdminLoginBtn" class="text-gray-500 hover:text-gray-700">
+                    ← Retour à la page de connexion
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
